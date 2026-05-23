@@ -37,6 +37,12 @@ const de = {
   'hero.headline': 'IT-Lösungen für Ihr Unternehmen',
   'hero.tagline': 'Webentwicklung, Datenanalyse & Automatisierung – maßgeschneidert für kleine Unternehmen.',
   'hero.cta': 'Kontakt aufnehmen',
+  'projects.subtitle': 'Ausgewählte Arbeiten',
+  'projects.filter.all': 'Alle',
+  'projects.filter.web': 'Web',
+  'projects.filter.data-api': 'Daten & APIs',
+  'projects.link.github': 'GitHub',
+  'projects.link.live': 'Live ansehen',
 } as const
 
 export default de

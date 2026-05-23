@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Services from '../../components/Services.astro';
+import Projects from '../../components/Projects.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations('en');
@@ -12,13 +13,7 @@ const t = useTranslations('en');
 
   <Services lang="en" />
 
-    {/* Projects Section */}
-    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-      <div class="mx-auto max-w-7xl">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">{t('nav.projects')}</h2>
-        <p class="text-lg text-gray-600">Projects will be added in a future slice.</p>
-      </div>
-    </section>
+  <Projects lang="en" />
 
     {/* About Section */}
     <section id="about" class="py-20 px-4 sm:px-6 lg:px-8">
