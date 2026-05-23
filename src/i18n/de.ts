@@ -41,6 +41,12 @@ const de = {
   'about.bio':
     'Ich bin Siam Ngamkam, IT-Freelancer bei Siam IT. Ich unterstütze kleine und lokale Unternehmen mit maßgeschneiderten digitalen Lösungen – von modernen Websites über Datenanalyse bis hin zur Automatisierung von Arbeitsabläufen. Mein Ansatz: pragmatisch, zuverlässig und immer auf Ihre Bedürfnisse zugeschnitten.',
   'about.techstack': 'Technologien',
+  'projects.subtitle': 'Ausgewählte Arbeiten',
+  'projects.filter.all': 'Alle',
+  'projects.filter.web': 'Web',
+  'projects.filter.data-api': 'Daten & APIs',
+  'projects.link.github': 'GitHub',
+  'projects.link.live': 'Live ansehen',
 } as const
 
 export default de
