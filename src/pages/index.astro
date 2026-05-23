@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
 import { useTranslations } from '../i18n/utils';
 
 const t = useTranslations('de');
@@ -9,13 +10,7 @@ const t = useTranslations('de');
 <Layout title={t('site.title')} description={t('site.description')} lang="de">
   <Hero lang="de" />
 
-  {/* Services Section */}
-    <section id="services" class="py-20 px-4 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-7xl">
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">{t('nav.services')}</h2>
-        <p class="text-lg text-gray-600">Leistungen werden in einem zukünftigen Slice hinzugefügt.</p>
-      </div>
-    </section>
+  <Services lang="de" />
 
     {/* Projects Section */}
     <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
