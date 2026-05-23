@@ -1,44 +1,53 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { useTranslations } from '../i18n/utils';
 
-const t = useTranslations('de');
-const title = `${t('legal.impressum.title')} | Siam IT`;
-const description = t('site.description');
+const title = 'Impressum | Siam IT';
+const description = 'Impressum – Angaben gemäß § 5 TMG für Siam Ngamkam IT-Dienstleistungen.';
 ---
 
-<Layout title={title} description={description} lang="de">
+<Layout title={title} description={description} lang="de" germanOnly>
   <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
-    <h1 class="text-3xl font-bold text-gray-900 mb-8">{t('legal.impressum.title')}</h1>
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">Impressum</h1>
 
     <section class="space-y-6 text-gray-700">
+      <!-- Angaben gemäß § 5 TMG -->
       <div>
-        <h2 class="text-lg font-semibold text-gray-900 mb-2">{t('legal.impressum.responsible')}</h2>
-        <p>Siam IT</p>
-        <p>Siam Ngamkam</p>
+        <h2 class="text-lg font-semibold text-gray-900 mb-2">Angaben gem. § 5 TMG</h2>
+        <p>Gewerbename: Siam Ngamkam IT-Dienstleistungen</p>
+        <p>Inhaber: Siam Ngamkam</p>
       </div>
 
       <div>
-        <h2 class="text-lg font-semibold text-gray-900 mb-2">{t('legal.impressum.address')}</h2>
+        <h2 class="text-lg font-semibold text-gray-900 mb-2">Anschrift</h2>
+        <!-- TODO: fill in street address -->
         <p>[Straße und Hausnummer]</p>
+        <!-- TODO: fill in postal code and city -->
         <p>[PLZ Ort]</p>
         <p>Deutschland</p>
       </div>
 
       <div>
-        <h2 class="text-lg font-semibold text-gray-900 mb-2">{t('legal.impressum.contact')}</h2>
+        <h2 class="text-lg font-semibold text-gray-900 mb-2">Kontakt</h2>
+        <!-- TODO: fill in phone number -->
         <p>Telefon: [Telefonnummer]</p>
+        <!-- TODO: fill in email address -->
         <p>E-Mail: [E-Mail-Adresse]</p>
       </div>
 
       <div>
-        <h2 class="text-lg font-semibold text-gray-900 mb-2">{t('legal.impressum.vat')}</h2>
-        <p>[USt-IdNr. falls vorhanden]</p>
+        <h2 class="text-lg font-semibold text-gray-900 mb-2">Umsatzsteuer-ID</h2>
+        <!-- TODO: fill in USt-IdNr or remove section if not applicable -->
+        <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:</p>
+        <p>[USt-IdNr.]</p>
       </div>
 
       <div class="border-t border-gray-200 pt-6 mt-6">
-        <h2 class="text-lg font-semibold text-gray-900 mb-2">{t('legal.disclaimer.title')}</h2>
-        <p class="text-sm">{t('legal.disclaimer.content')}</p>
+        <h2 class="text-lg font-semibold text-gray-900 mb-2">Haftungsausschluss</h2>
+        <p class="text-sm">
+          Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte
+          externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber
+          verantwortlich.
+        </p>
       </div>
     </section>
   </div>

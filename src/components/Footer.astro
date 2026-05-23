@@ -9,8 +9,8 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const currentYear = new Date().getFullYear();
 
-const impressumPath = lang === 'de' ? '/impressum' : '/en/impressum';
-const datenschutzPath = lang === 'de' ? '/datenschutz' : '/en/datenschutz';
+const impressumPath = '/impressum';
+const datenschutzPath = '/datenschutz';
 ---
 
 <footer class="bg-gray-900 text-gray-300">
