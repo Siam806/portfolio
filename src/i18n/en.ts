@@ -33,6 +33,9 @@ const en = {
   'datenschutz.rights.title': 'Your Rights',
   'datenschutz.rights.content':
     'You have the right to access, rectify, erase, and restrict the processing of your personal data. Contact us using the contact information provided above.',
+  'hero.headline': 'IT Solutions for Your Business',
+  'hero.tagline': 'Web development, data analysis & automation – tailored for small businesses.',
+  'hero.cta': 'Get in Touch',
 } as const
 
 export default en
