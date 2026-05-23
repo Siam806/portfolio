@@ -47,6 +47,18 @@ const de = {
   'projects.filter.data-api': 'Daten & APIs',
   'projects.link.github': 'GitHub',
   'projects.link.live': 'Live ansehen',
+  'contact.subtitle': 'Schreiben Sie mir eine Nachricht',
+  'contact.name': 'Name',
+  'contact.email': 'E-Mail',
+  'contact.message': 'Nachricht',
+  'contact.send': 'Nachricht senden',
+  'contact.sending': 'Wird gesendet…',
+  'contact.success': 'Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.',
+  'contact.error': 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.',
+  'contact.error.name': 'Bitte geben Sie Ihren Namen ein.',
+  'contact.error.email': 'Bitte geben Sie Ihre E-Mail-Adresse ein.',
+  'contact.error.email.invalid': 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
+  'contact.error.message': 'Bitte geben Sie eine Nachricht ein.',
 } as const
 
 export default de

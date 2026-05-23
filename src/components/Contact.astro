@@ -1,0 +1,189 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+  <div class="mx-auto max-w-2xl">
+    <h2 class="text-3xl font-bold text-gray-900 mb-4">{t('nav.contact')}</h2>
+    <p class="mb-12 text-lg text-gray-600">{t('contact.subtitle')}</p>
+
+    <form
+      id="contact-form"
+      class="space-y-6"
+      novalidate
+      data-lang={lang}
+      data-err-name={t('contact.error.name')}
+      data-err-email={t('contact.error.email')}
+      data-err-email-invalid={t('contact.error.email.invalid')}
+      data-err-message={t('contact.error.message')}
+      data-msg-success={t('contact.success')}
+      data-msg-error={t('contact.error')}
+      data-msg-sending={t('contact.sending')}
+      data-msg-send={t('contact.send')}
+    >
+      <div>
+        <label for="contact-name" class="block text-sm font-medium text-gray-700 mb-1">
+          {t('contact.name')}
+        </label>
+        <input
+          type="text"
+          id="contact-name"
+          name="name"
+          required
+          class="block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        />
+        <p class="mt-1 text-sm text-red-600 hidden" data-error="name"></p>
+      </div>
+
+      <div>
+        <label for="contact-email" class="block text-sm font-medium text-gray-700 mb-1">
+          {t('contact.email')}
+        </label>
+        <input
+          type="email"
+          id="contact-email"
+          name="email"
+          required
+          class="block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        />
+        <p class="mt-1 text-sm text-red-600 hidden" data-error="email"></p>
+      </div>
+
+      <div>
+        <label for="contact-message" class="block text-sm font-medium text-gray-700 mb-1">
+          {t('contact.message')}
+        </label>
+        <textarea
+          id="contact-message"
+          name="message"
+          rows="5"
+          required
+          class="block w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-y"
+        ></textarea>
+        <p class="mt-1 text-sm text-red-600 hidden" data-error="message"></p>
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          id="contact-submit"
+          class="inline-block w-full rounded-lg bg-blue-700 px-8 py-3 text-base font-semibold text-white shadow-sm transition-colors hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed sm:w-auto"
+        >
+          {t('contact.send')}
+        </button>
+      </div>
+
+      <div id="contact-feedback" class="hidden rounded-lg px-4 py-3 text-sm" role="alert"></div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('contact-submit') as HTMLButtonElement;
+  const feedback = document.getElementById('contact-feedback') as HTMLDivElement;
+
+  const nameInput = document.getElementById('contact-name') as HTMLInputElement;
+  const emailInput = document.getElementById('contact-email') as HTMLInputElement;
+  const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement;
+
+  const errName = form.dataset.errName!;
+  const errEmail = form.dataset.errEmail!;
+  const errEmailInvalid = form.dataset.errEmailInvalid!;
+  const errMessage = form.dataset.errMessage!;
+  const msgSuccess = form.dataset.msgSuccess!;
+  const msgError = form.dataset.msgError!;
+  const msgSending = form.dataset.msgSending!;
+  const msgSend = form.dataset.msgSend!;
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function showError(field: string, message: string) {
+    const el = form.querySelector(`[data-error="${field}"]`) as HTMLParagraphElement;
+    el.textContent = message;
+    el.classList.remove('hidden');
+  }
+
+  function clearErrors() {
+    form.querySelectorAll('[data-error]').forEach((el) => {
+      el.textContent = '';
+      el.classList.add('hidden');
+    });
+  }
+
+  function showFeedback(type: 'success' | 'error', message: string) {
+    feedback.textContent = message;
+    feedback.classList.remove('hidden', 'bg-green-50', 'text-green-800', 'bg-red-50', 'text-red-800');
+    if (type === 'success') {
+      feedback.classList.add('bg-green-50', 'text-green-800');
+    } else {
+      feedback.classList.add('bg-red-50', 'text-red-800');
+    }
+  }
+
+  function validate(): boolean {
+    clearErrors();
+    let valid = true;
+
+    if (!nameInput.value.trim()) {
+      showError('name', errName);
+      valid = false;
+    }
+
+    if (!emailInput.value.trim()) {
+      showError('email', errEmail);
+      valid = false;
+    } else if (!emailRegex.test(emailInput.value.trim())) {
+      showError('email', errEmailInvalid);
+      valid = false;
+    }
+
+    if (!messageInput.value.trim()) {
+      showError('message', errMessage);
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    feedback.classList.add('hidden');
+
+    if (!validate()) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = msgSending;
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: nameInput.value.trim(),
+          email: emailInput.value.trim(),
+          message: messageInput.value.trim(),
+        }),
+      });
+
+      if (res.ok) {
+        showFeedback('success', msgSuccess);
+        form.reset();
+      } else {
+        showFeedback('error', msgError);
+      }
+    } catch {
+      showFeedback('error', msgError);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = msgSend;
+    }
+  });
+</script>

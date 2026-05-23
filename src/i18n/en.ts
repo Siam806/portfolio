@@ -47,6 +47,18 @@ const en = {
   'projects.filter.data-api': 'Data & APIs',
   'projects.link.github': 'GitHub',
   'projects.link.live': 'View Live',
+  'contact.subtitle': 'Send me a message',
+  'contact.name': 'Name',
+  'contact.email': 'Email',
+  'contact.message': 'Message',
+  'contact.send': 'Send Message',
+  'contact.sending': 'Sending…',
+  'contact.success': 'Thank you! Your message has been sent successfully.',
+  'contact.error': 'An error occurred while sending. Please try again later.',
+  'contact.error.name': 'Please enter your name.',
+  'contact.error.email': 'Please enter your email address.',
+  'contact.error.email.invalid': 'Please enter a valid email address.',
+  'contact.error.message': 'Please enter a message.',
 } as const
 
 export default en
