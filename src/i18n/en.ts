@@ -37,6 +37,12 @@ const en = {
   'hero.headline': 'IT Solutions for Your Business',
   'hero.tagline': 'Web development, data analysis & automation – tailored for small businesses.',
   'hero.cta': 'Get in Touch',
+  'projects.subtitle': 'Selected Work',
+  'projects.filter.all': 'All',
+  'projects.filter.web': 'Web',
+  'projects.filter.data-api': 'Data & APIs',
+  'projects.link.github': 'GitHub',
+  'projects.link.live': 'View Live',
 } as const
 
 export default en
