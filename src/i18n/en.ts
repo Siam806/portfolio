@@ -37,6 +37,10 @@ const en = {
   'hero.headline': 'IT Solutions for Your Business',
   'hero.tagline': 'Web development, data analysis & automation – tailored for small businesses.',
   'hero.cta': 'Get in Touch',
+  'about.title': 'About Me',
+  'about.bio':
+    'I am Siam Ngamkam, an IT freelancer at Siam IT. I help small and local businesses with tailored digital solutions – from modern websites and data analysis to workflow automation. My approach: pragmatic, reliable, and always focused on your needs.',
+  'about.techstack': 'Technologies',
   'projects.subtitle': 'Selected Work',
   'projects.filter.all': 'All',
   'projects.filter.web': 'Web',
