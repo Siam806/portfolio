@@ -1,0 +1,168 @@
+---
+import { useTranslations, getOtherLocale, type Lang, type AllKeys } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+const t = useTranslations(lang);
+const otherLocale = getOtherLocale(lang);
+
+// Determine the target URL for language toggle
+const isHomePage = currentPath === '/' || currentPath === '/en/';
+const targetPath = isHomePage
+  ? otherLocale === 'de' ? '/' : '/en/'
+  : currentPath.replace(`/${lang}/`, otherLocale === 'de' ? '/' : `/${otherLocale}/`).replace('//', '/');
+
+const navItems: Array<{ key: AllKeys; href: string }> = [
+  { key: 'nav.services', href: '#services' },
+  { key: 'nav.projects', href: '#projects' },
+  { key: 'nav.about', href: '#about' },
+  { key: 'nav.contact', href: '#contact' },
+];
+---
+
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      {/* Brand */}
+      <a href={lang === 'de' ? '/' : '/en/'} class="text-xl font-bold text-gray-900 hover:text-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">
+        Siam IT
+      </a>
+
+      {/* Desktop Navigation */}
+      <nav class="hidden md:flex items-center gap-8" aria-label="Main navigation">
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm font-medium text-gray-700 hover:text-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded px-2 py-1"
+          >
+            {t(item.key)}
+          </a>
+        ))}
+
+        {/* Language Toggle */}
+        <div class="flex items-center gap-1 text-sm" role="group" aria-label="Language switcher">
+          <a
+            href={targetPath}
+            data-locale-toggle
+            data-current={lang}
+            data-target={otherLocale}
+            class:list={[
+              'px-2 py-1 rounded font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
+              lang === 'de' ? 'text-blue-700 bg-blue-50' : 'text-gray-500 hover:text-gray-700'
+            ]}
+          >
+            {t('lang.de')}
+          </a>
+          <span class="text-gray-300">|</span>
+          <a
+            href={targetPath}
+            data-locale-toggle
+            data-current={lang}
+            data-target={otherLocale}
+            class:list={[
+              'px-2 py-1 rounded font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2',
+              lang === 'en' ? 'text-blue-700 bg-blue-50' : 'text-gray-500 hover:text-gray-700'
+            ]}
+          >
+            {t('lang.en')}
+          </a>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Button */}
+      <button
+        type="button"
+        class="md:hidden p-2 rounded-md text-gray-700 hover:text-blue-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        data-mobile-menu-toggle
+      >
+        <span class="sr-only">{t('nav.home')} Menu</span>
+        <svg class="h-6 w-6 menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg class="h-6 w-6 close-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  {/* Mobile Menu */}
+  <div id="mobile-menu" class="hidden md:hidden border-t border-gray-200 bg-white">
+    <div class="space-y-1 px-4 py-3">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          {t(item.key)}
+        </a>
+      ))}
+
+      {/* Mobile Language Toggle */}
+      <div class="border-t border-gray-200 pt-3 mt-3">
+        <div class="flex items-center gap-2 px-3">
+          <span class="text-sm text-gray-500">Language:</span>
+          <a
+            href={targetPath}
+            data-locale-toggle
+            data-current={lang}
+            data-target={otherLocale}
+            class:list={[
+              'px-3 py-1 rounded text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500',
+              lang === 'de' ? 'text-blue-700 bg-blue-50' : 'text-gray-500 hover:text-gray-700'
+            ]}
+          >
+            {t('lang.de')}
+          </a>
+          <a
+            href={targetPath}
+            data-locale-toggle
+            data-current={lang}
+            data-target={otherLocale}
+            class:list={[
+              'px-3 py-1 rounded text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500',
+              lang === 'en' ? 'text-blue-700 bg-blue-50' : 'text-gray-500 hover:text-gray-700'
+            ]}
+          >
+            {t('lang.en')}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.querySelector('.menu-icon');
+  const closeIcon = document.querySelector('.close-icon');
+
+  if (mobileMenuToggle && mobileMenu) {
+    mobileMenuToggle.addEventListener('click', () => {
+      const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+      mobileMenuToggle.setAttribute('aria-expanded', String(!isExpanded));
+      mobileMenu.classList.toggle('hidden');
+      menuIcon?.classList.toggle('hidden');
+      closeIcon?.classList.toggle('hidden');
+    });
+  }
+
+  // Language toggle - save preference to localStorage
+  const localeToggles = document.querySelectorAll('[data-locale-toggle]');
+  localeToggles.forEach((toggle) => {
+    toggle.addEventListener('click', (e) => {
+      const target = (e.currentTarget as HTMLElement)?.dataset?.target;
+      if (target) {
+        localStorage.setItem('preferred-locale', target);
+      }
+    });
+  });
+</script>

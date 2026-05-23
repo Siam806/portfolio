@@ -6,12 +6,37 @@ const t = useTranslations('de');
 ---
 
 <Layout title={t('site.title')} description={t('site.description')} lang="de">
-  <main class="flex min-h-screen flex-col items-center justify-center p-8">
-    <h1 class="text-4xl font-bold text-blue-700">
-      {t('site.title')}
-    </h1>
-    <p class="mt-4 text-lg text-gray-600">
-      {t('site.description')}
-    </p>
+  <main class="flex-1">
+    {/* Services Section */}
+    <section id="services" class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">{t('nav.services')}</h2>
+        <p class="text-lg text-gray-600">Leistungen werden in einem zukünftigen Slice hinzugefügt.</p>
+      </div>
+    </section>
+
+    {/* Projects Section */}
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">{t('nav.projects')}</h2>
+        <p class="text-lg text-gray-600">Projekte werden in einem zukünftigen Slice hinzugefügt.</p>
+      </div>
+    </section>
+
+    {/* About Section */}
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">{t('nav.about')}</h2>
+        <p class="text-lg text-gray-600">Über mich wird in einem zukünftigen Slice hinzugefügt.</p>
+      </div>
+    </section>
+
+    {/* Contact Section */}
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <div class="mx-auto max-w-7xl">
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">{t('nav.contact')}</h2>
+        <p class="text-lg text-gray-600">Kontakt wird in einem zukünftigen Slice hinzugefügt.</p>
+      </div>
+    </section>
   </main>
 </Layout>

@@ -4,7 +4,35 @@ const en = {
   'nav.home': 'Home',
   'nav.about': 'About',
   'nav.services': 'Services',
+  'nav.projects': 'Projects',
   'nav.contact': 'Contact',
-} as const;
+  'footer.legal': 'Legal',
+  'footer.impressum': 'Legal Notice',
+  'footer.datenschutz': 'Privacy Policy',
+  'footer.copyright': '© {year} Siam IT. All rights reserved.',
+  'lang.de': 'DE',
+  'lang.en': 'EN',
+  'legal.impressum.title': 'Legal Notice',
+  'legal.impressum.responsible': 'Responsible for content',
+  'legal.impressum.address': 'Address',
+  'legal.impressum.contact': 'Contact',
+  'legal.impressum.vat': 'VAT ID',
+  'legal.disclaimer.title': 'Disclaimer',
+  'legal.disclaimer.content':
+    'Despite careful content control, we assume no liability for the content of external links. The operators of the linked pages are solely responsible for their content.',
+  'datenschutz.title': 'Privacy Policy',
+  'datenschutz.intro':
+    'This privacy policy informs you about the processing of personal data on this website.',
+  'datenschutz.responsible.title': 'Data Controller',
+  'datenschutz.data.title': 'Collection and Processing of Data',
+  'datenschutz.data.content':
+    'When visiting this website, no personal data is collected. Only technically necessary data such as IP address and browser information is processed to provide the website.',
+  'datenschutz.cookies.title': 'Cookies and Local Storage',
+  'datenschutz.cookies.content':
+    "This website only stores your language preference (DE/EN) in your browser's localStorage to restore your preferred language on future visits. This data is not transmitted to servers and does not leave your browser.",
+  'datenschutz.rights.title': 'Your Rights',
+  'datenschutz.rights.content':
+    'You have the right to access, rectify, erase, and restrict the processing of your personal data. Contact us using the contact information provided above.',
+} as const
 
-export default en;
+export default en

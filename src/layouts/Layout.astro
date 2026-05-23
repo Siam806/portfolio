@@ -1,13 +1,25 @@
 ---
 import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { type Lang, defaultLang } from '../i18n/utils';
 
 interface Props {
   title: string;
   description: string;
-  lang?: string;
+  lang?: Lang;
+  ogImage?: string;
 }
 
-const { title, description, lang = 'de' } = Astro.props;
+const {
+  title,
+  description,
+  lang = defaultLang,
+  ogImage = '/favicon.svg'
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://siam-it.de').toString();
+const currentPath = Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -18,10 +30,52 @@ const { title, description, lang = 'de' } = Astro.props;
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
+
+    {/* Primary SEO */}
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    {/* Open Graph */}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_US'} />
+
+    {/* Alternate language versions */}
+    <link rel="alternate" hreflang="de" href={new URL(currentPath.replace('/en/', '/'), Astro.site || 'https://siam-it.de').toString()} />
+    <link rel="alternate" hreflang="en" href={new URL(currentPath.replace(/^\//, '/en/').replace('//', '/'), Astro.site || 'https://siam-it.de').toString()} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site || 'https://siam-it.de').toString()} />
+
+    {/* Language preference script - runs before page render */}
+    <script is:inline>
+      (function() {
+        const preferred = localStorage.getItem('preferred-locale');
+        const currentPath = window.location.pathname;
+        const isEnglishPath = currentPath.startsWith('/en/') || currentPath === '/en';
+
+        if (preferred) {
+          // If user prefers DE but is on EN path
+          if (preferred === 'de' && isEnglishPath) {
+            window.location.href = currentPath.replace(/^\/en/, '') || '/';
+            return;
+          }
+          // If user prefers EN but is on DE path
+          if (preferred === 'en' && !isEnglishPath) {
+            window.location.href = '/en' + currentPath;
+            return;
+          }
+        }
+      })();
+    </script>
   </head>
-  <body class="min-h-screen bg-white text-gray-900 antialiased">
-    <slot />
+  <body class="flex min-h-screen flex-col bg-white text-gray-900 antialiased">
+    <Header lang={lang} currentPath={currentPath} />
+    <main class="flex-1" id="main-content">
+      <slot />
+    </main>
+    <Footer lang={lang} />
   </body>
 </html>
