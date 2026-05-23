@@ -33,6 +33,7 @@ const de = {
   'datenschutz.rights.title': 'Ihre Rechte',
   'datenschutz.rights.content':
     'Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten. Kontaktieren Sie uns hierzu unter den oben genannten Kontaktdaten.',
+  'services.subtitle': 'Was ich für Sie tun kann',
   'hero.headline': 'IT-Lösungen für Ihr Unternehmen',
   'hero.tagline': 'Webentwicklung, Datenanalyse & Automatisierung – maßgeschneidert für kleine Unternehmen.',
   'hero.cta': 'Kontakt aufnehmen',

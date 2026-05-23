@@ -1,5 +1,6 @@
-import { defineCollection, glob } from 'astro:content';
-import { projectSchema, serviceSchema } from './src/content/schemas';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { projectSchema, serviceSchema } from './content/schemas';
 
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.yaml', base: './src/content/projects' }),
