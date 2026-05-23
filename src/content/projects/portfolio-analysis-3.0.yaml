@@ -1,0 +1,12 @@
+title: Portfolio Analysis 3.0
+slug: portfolio-analysis-3.0
+descriptionDe: Datenanalyse-API für Portfolio-Performance und Risikobewertung
+descriptionEn: Data analysis API for portfolio performance and risk assessment
+category: data-api
+techStack:
+  - Python
+  - FastAPI
+  - Pandas
+  - Redis
+featured: true
+githubUrl: https://github.com/example/portfolio-analysis

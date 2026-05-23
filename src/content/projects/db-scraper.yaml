@@ -1,0 +1,12 @@
+title: DB Scraper
+descriptionDe: Automatisierte Datenerfassung aus verschiedenen Quellen mit API-Schnittstelle
+descriptionEn: Automated data scraping from various sources with API interface
+category: data-api
+slug: db-scraper
+techStack:
+  - Python
+  - Scrapy
+  - Playwright
+  - MongoDB
+featured: false
+githubUrl: https://github.com/example/db-scraper

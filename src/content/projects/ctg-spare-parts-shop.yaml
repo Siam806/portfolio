@@ -1,0 +1,13 @@
+title: CTG Spare Parts Shop
+slug: ctg-spare-parts-shop
+descriptionDe: E-Commerce-Plattform für Ersatzteile mit Warenkorb und Zahlungsabwicklung
+descriptionEn: E-commerce platform for spare parts with shopping cart and payment processing
+category: web
+techStack:
+  - Astro
+  - React
+  - Stripe
+  - PostgreSQL
+featured: true
+githubUrl: https://github.com/example/ctg-spare-parts
+liveUrl: https://ctg-spare-parts.example.com
