@@ -33,7 +33,7 @@ const navItems: Array<{ key: AllKeys; href: string }> = [
     <div class="flex h-16 items-center justify-between">
       {/* Brand */}
       <a href={lang === 'de' ? '/' : '/en/'} class="flex items-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded" aria-label="Siam IT – Home">
-        <Image src={logo} alt="Siam IT" width={39} height={36} class="h-9 w-auto" />
+        <Image src={logo} alt="Siam IT" width={39} height={36} densities={[1, 2]} class="h-9 w-auto" />
       </a>
 
       {/* Desktop Navigation */}
