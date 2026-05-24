@@ -11,16 +11,18 @@ const t = useTranslations(lang);
 const otherLocale = getOtherLocale(lang);
 
 // Determine the target URL for language toggle
-const isHomePage = currentPath === '/' || currentPath === '/en/';
+const isHomePage = currentPath === '/' || currentPath === '/en/' || currentPath === '/en';
 const targetPath = isHomePage
   ? otherLocale === 'de' ? '/' : '/en/'
   : currentPath.replace(`/${lang}/`, otherLocale === 'de' ? '/' : `/${otherLocale}/`).replace('//', '/');
 
+const homePath = lang === 'de' ? '/' : '/en/';
+
 const navItems: Array<{ key: AllKeys; href: string }> = [
-  { key: 'nav.services', href: '#services' },
-  { key: 'nav.projects', href: '#projects' },
-  { key: 'nav.about', href: '#about' },
-  { key: 'nav.contact', href: '#contact' },
+  { key: 'nav.services', href: isHomePage ? '#services' : `${homePath}#services` },
+  { key: 'nav.projects', href: isHomePage ? '#projects' : `${homePath}#projects` },
+  { key: 'nav.about', href: isHomePage ? '#about' : `${homePath}#about` },
+  { key: 'nav.contact', href: isHomePage ? '#contact' : `${homePath}#contact` },
 ];
 ---
 
