@@ -1,0 +1,14 @@
+title: Walkup
+slug: walkup
+descriptionDe: Baseball Walk-Up-Song-Manager zum Verwalten von Teams, Aufstellungen und Walk-Up-Songs mit Echtzeit-Wiedergabe
+descriptionEn: Baseball walk-up song manager for managing teams, lineups, and walk-up songs with real-time playback
+category: web
+techStack:
+  - React
+  - React Router
+  - Supabase
+  - Stripe
+  - TailwindCSS
+featured: true
+githubUrl: https://github.com/Siam806/walkup
+liveUrl: https://walkup.vercel.app
