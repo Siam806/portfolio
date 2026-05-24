@@ -26,6 +26,7 @@ jobs:
       - name: Configure SSH
         run: |
           mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
           printf '%s\n' "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H "${DEPLOY_HOST}" >> ~/.ssh/known_hosts
@@ -34,8 +35,9 @@ jobs:
 
       - name: Deploy to VPS
         run: |
+          export RSYNC_RSH="ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=yes"
           rsync -avz --delete --exclude node_modules --exclude dist --exclude .git --exclude .env ./ "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}/"
           if [ -n "${DEPLOY_ENV}" ]; then
-            printf '%s\n' "${DEPLOY_ENV}" | ssh "${DEPLOY_USER}@${DEPLOY_HOST}" "cat > '${DEPLOY_PATH}/.env'"
+            printf '%s\n' "${DEPLOY_ENV}" | ssh -i ~/.ssh/id_rsa "${DEPLOY_USER}@${DEPLOY_HOST}" "cat > '${DEPLOY_PATH}/.env'"
           fi
-          ssh "${DEPLOY_USER}@${DEPLOY_HOST}" "cd '${DEPLOY_PATH}' && docker compose up -d --build"
+          ssh -i ~/.ssh/id_rsa "${DEPLOY_USER}@${DEPLOY_HOST}" "cd '${DEPLOY_PATH}' && docker compose up -d --build"
