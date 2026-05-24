@@ -13,13 +13,20 @@ fi
 : "${DEPLOY_USER:?DEPLOY_USER is not set}"
 : "${DEPLOY_PATH:?DEPLOY_PATH is not set}"
 
-echo "==> Installing dependencies"
-npm ci
+REMOTE="${DEPLOY_USER}@${DEPLOY_HOST}"
 
-echo "==> Building site"
-npm run build
+echo "==> Syncing project to ${REMOTE}:${DEPLOY_PATH}"
+rsync -avz --delete \
+  --exclude node_modules \
+  --exclude dist \
+  --exclude .git \
+  --exclude .env \
+  ./ "${REMOTE}:${DEPLOY_PATH}/"
 
-echo "==> Deploying to ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}"
-rsync -avz --delete dist/ "${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_PATH}"
+echo "==> Copying .env to remote"
+scp .env "${REMOTE}:${DEPLOY_PATH}/.env"
+
+echo "==> Building and starting containers on remote"
+ssh "${REMOTE}" "cd ${DEPLOY_PATH} && docker compose up -d --build"
 
 echo "==> Deploy complete"
