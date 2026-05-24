@@ -7,18 +7,19 @@ Your **VPS** needs:
 - **Docker** and **Docker Compose** (v2)
 - **SSH server** (e.g. OpenSSH)
 
-Your **local machine** needs:
+Your **local machine** does not need rsync or SSH access for deployment. Deployment is now handled by GitHub Actions.
 
-- rsync
-- SSH access to the VPS (key-based authentication recommended)
+## Environment variables and GitHub secrets
 
-## Environment variables
+Copy `.env.example` to `.env` locally to review the variables, then provide the deploy secrets in GitHub:
 
-Copy `.env.example` to `.env` and fill in the values:
+- `DEPLOY_HOST`
+- `DEPLOY_USER`
+- `DEPLOY_PATH`
+- `SSH_PRIVATE_KEY`
+- `DEPLOY_ENV` (optional; raw `.env` file contents)
 
-```bash
-cp .env.example .env
-```
+If you set `DEPLOY_ENV`, the workflow writes it to `.env` on the remote host.
 
 | Variable | Description |
 |---|---|
@@ -62,23 +63,21 @@ The project includes:
   - `app` — The Astro Node server (reads `RESEND_API_KEY` from `.env`)
   - `nginx` — Reverse proxy on port 80, forwards traffic to the app
 - **`nginx.conf`** — Nginx reverse proxy configuration
-- **`deploy.sh`** — Syncs the project to the VPS via rsync, copies `.env`, then runs `docker compose up -d --build` remotely.
+- **GitHub Actions workflow** — Syncs the project to the VPS via rsync, optionally writes the `.env` contents from `DEPLOY_ENV`, then runs `docker compose up -d --build` remotely.
 
 ## Deploying
 
-From the project root on your local machine, run:
+Deployment now runs automatically on push to `main`/`master`, or can be triggered manually from the GitHub Actions tab.
 
-```bash
-./deploy.sh
-```
+The workflow uses these GitHub secrets:
 
-This will:
+- `DEPLOY_HOST`
+- `DEPLOY_USER`
+- `DEPLOY_PATH`
+- `SSH_PRIVATE_KEY`
+- `DEPLOY_ENV` (optional)
 
-1. Sync the project files to your VPS (excluding `node_modules`, `dist`, `.git`, `.env`)
-2. Copy your `.env` to the remote server
-3. Build the Docker image and start the containers on the VPS
-
-The site will be available on port 80 of your VPS.
+The site will be available on port 80 of your VPS after the workflow completes.
 
 ## Useful commands (run on VPS)
 
