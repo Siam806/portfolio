@@ -33,6 +33,32 @@ const en = {
   'datenschutz.rights.title': 'Your Rights',
   'datenschutz.rights.content':
     'You have the right to access, rectify, erase, and restrict the processing of your personal data. Contact us using the contact information provided above.',
+  'services.subtitle': 'What I can do for you',
+  'hero.headline': 'IT Solutions for Your Business',
+  'hero.tagline': 'Web development, data analysis & automation – tailored for small businesses.',
+  'hero.cta': 'Get in Touch',
+  'about.title': 'About Me',
+  'about.bio':
+    'I am Siam Ngamkam, an IT freelancer at Siam IT. I help small and local businesses with tailored digital solutions – from modern websites and data analysis to workflow automation. My approach: pragmatic, reliable, and always focused on your needs.',
+  'about.techstack': 'Technologies',
+  'projects.subtitle': 'Selected Work',
+  'projects.filter.all': 'All',
+  'projects.filter.web': 'Web',
+  'projects.filter.data-api': 'Data & APIs',
+  'projects.link.github': 'GitHub',
+  'projects.link.live': 'View Live',
+  'contact.subtitle': 'Send me a message',
+  'contact.name': 'Name',
+  'contact.email': 'Email',
+  'contact.message': 'Message',
+  'contact.send': 'Send Message',
+  'contact.sending': 'Sending…',
+  'contact.success': 'Thank you! Your message has been sent successfully.',
+  'contact.error': 'An error occurred while sending. Please try again later.',
+  'contact.error.name': 'Please enter your name.',
+  'contact.error.email': 'Please enter your email address.',
+  'contact.error.email.invalid': 'Please enter a valid email address.',
+  'contact.error.message': 'Please enter a message.',
 } as const
 
 export default en

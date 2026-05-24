@@ -33,6 +33,32 @@ const de = {
   'datenschutz.rights.title': 'Ihre Rechte',
   'datenschutz.rights.content':
     'Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer personenbezogenen Daten. Kontaktieren Sie uns hierzu unter den oben genannten Kontaktdaten.',
+  'services.subtitle': 'Was ich für Sie tun kann',
+  'hero.headline': 'IT-Lösungen für Ihr Unternehmen',
+  'hero.tagline': 'Webentwicklung, Datenanalyse & Automatisierung – maßgeschneidert für kleine Unternehmen.',
+  'hero.cta': 'Kontakt aufnehmen',
+  'about.title': 'Über mich',
+  'about.bio':
+    'Ich bin Siam Ngamkam, IT-Freelancer bei Siam IT. Ich unterstütze kleine und lokale Unternehmen mit maßgeschneiderten digitalen Lösungen – von modernen Websites über Datenanalyse bis hin zur Automatisierung von Arbeitsabläufen. Mein Ansatz: pragmatisch, zuverlässig und immer auf Ihre Bedürfnisse zugeschnitten.',
+  'about.techstack': 'Technologien',
+  'projects.subtitle': 'Ausgewählte Arbeiten',
+  'projects.filter.all': 'Alle',
+  'projects.filter.web': 'Web',
+  'projects.filter.data-api': 'Daten & APIs',
+  'projects.link.github': 'GitHub',
+  'projects.link.live': 'Live ansehen',
+  'contact.subtitle': 'Schreiben Sie mir eine Nachricht',
+  'contact.name': 'Name',
+  'contact.email': 'E-Mail',
+  'contact.message': 'Nachricht',
+  'contact.send': 'Nachricht senden',
+  'contact.sending': 'Wird gesendet…',
+  'contact.success': 'Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.',
+  'contact.error': 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.',
+  'contact.error.name': 'Bitte geben Sie Ihren Namen ein.',
+  'contact.error.email': 'Bitte geben Sie Ihre E-Mail-Adresse ein.',
+  'contact.error.email.invalid': 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
+  'contact.error.message': 'Bitte geben Sie eine Nachricht ein.',
 } as const
 
 export default de

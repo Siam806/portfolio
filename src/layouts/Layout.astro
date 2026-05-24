@@ -9,13 +9,15 @@ interface Props {
   description: string;
   lang?: Lang;
   ogImage?: string;
+  germanOnly?: boolean;
 }
 
 const {
   title,
   description,
   lang = defaultLang,
-  ogImage = '/android-chrome-512x512.png'
+  ogImage = '/favicon.svg',
+  germanOnly = false,
 } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://siam-it.de').toString();
@@ -48,31 +50,37 @@ const currentPath = Astro.url.pathname;
     <meta property="og:locale" content={lang === 'de' ? 'de_DE' : 'en_US'} />
 
     {/* Alternate language versions */}
-    <link rel="alternate" hreflang="de" href={new URL(currentPath.replace('/en/', '/'), Astro.site || 'https://siam-it.de').toString()} />
-    <link rel="alternate" hreflang="en" href={new URL(currentPath.replace(/^\//, '/en/').replace('//', '/'), Astro.site || 'https://siam-it.de').toString()} />
-    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site || 'https://siam-it.de').toString()} />
+    {!germanOnly && (
+      <>
+        <link rel="alternate" hreflang="de" href={new URL(currentPath.replace('/en/', '/'), Astro.site || 'https://siam-it.de').toString()} />
+        <link rel="alternate" hreflang="en" href={new URL(currentPath.replace(/^\//, '/en/').replace('//', '/'), Astro.site || 'https://siam-it.de').toString()} />
+        <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site || 'https://siam-it.de').toString()} />
+      </>
+    )}
 
     {/* Language preference script - runs before page render */}
-    <script is:inline>
-      (function() {
-        const preferred = localStorage.getItem('preferred-locale');
-        const currentPath = window.location.pathname;
-        const isEnglishPath = currentPath.startsWith('/en/') || currentPath === '/en';
+    {!germanOnly && (
+      <script is:inline>
+        (function() {
+          const preferred = localStorage.getItem('preferred-locale');
+          const currentPath = window.location.pathname;
+          const isEnglishPath = currentPath.startsWith('/en/') || currentPath === '/en';
 
-        if (preferred) {
-          // If user prefers DE but is on EN path
-          if (preferred === 'de' && isEnglishPath) {
-            window.location.href = currentPath.replace(/^\/en/, '') || '/';
-            return;
+          if (preferred) {
+            // If user prefers DE but is on EN path
+            if (preferred === 'de' && isEnglishPath) {
+              window.location.href = currentPath.replace(/^\/en/, '') || '/';
+              return;
+            }
+            // If user prefers EN but is on DE path
+            if (preferred === 'en' && !isEnglishPath) {
+              window.location.href = '/en' + currentPath;
+              return;
+            }
           }
-          // If user prefers EN but is on DE path
-          if (preferred === 'en' && !isEnglishPath) {
-            window.location.href = '/en' + currentPath;
-            return;
-          }
-        }
-      })();
-    </script>
+        })();
+      </script>
+    )}
   </head>
   <body class="flex min-h-screen flex-col bg-white text-gray-900 antialiased">
     <Header lang={lang} currentPath={currentPath} />
