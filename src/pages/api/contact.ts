@@ -4,9 +4,9 @@ export const prerender = false;
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Prevent dead code elimination by using dynamic access
+// Use process.env for runtime env vars in SSR mode
 const getApiKey = () => {
-  const key = import.meta.env.RESEND_API_KEY;
+  const key = process.env.RESEND_API_KEY;
   return typeof key === 'string' ? key : undefined;
 };
 
