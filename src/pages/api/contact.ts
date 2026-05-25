@@ -1,9 +1,14 @@
 import type { APIRoute } from 'astro';
-import { Resend } from 'resend';
 
 export const prerender = false;
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+// Prevent dead code elimination by using dynamic access
+const getApiKey = () => {
+  const key = import.meta.env.RESEND_API_KEY;
+  return typeof key === 'string' ? key : undefined;
+};
 
 export const POST: APIRoute = async ({ request }) => {
   let body: unknown;
@@ -38,14 +43,17 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  const apiKey = import.meta.env.RESEND_API_KEY;
+  const apiKey = getApiKey();
   if (!apiKey) {
+    console.error('RESEND_API_KEY not configured');
     return new Response(JSON.stringify({ error: 'Server configuration error' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
   }
 
+  // Dynamic import to prevent build-time elimination
+  const { Resend } = await import('resend');
   const resend = new Resend(apiKey);
 
   try {
