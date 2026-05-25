@@ -49,18 +49,28 @@ export const POST: APIRoute = async ({ request }) => {
   const resend = new Resend(apiKey);
 
   try {
-    await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>',
+    const result = await resend.emails.send({
+      from: 'contact@siams.app',
       to: 'siamthedoom@gmail.com',
+      replyTo: (email as string).trim(),
       subject: `Portfolio Contact: ${(name as string).trim()}`,
       text: `Name: ${(name as string).trim()}\nEmail: ${(email as string).trim()}\n\nMessage:\n${(message as string).trim()}`,
     });
+
+    if (result.error) {
+      console.error('Resend API error:', result.error);
+      return new Response(JSON.stringify({ error: 'Failed to send email', details: result.error }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
-  } catch {
+  } catch (err) {
+    console.error('Email send exception:', err);
     return new Response(JSON.stringify({ error: 'Failed to send email' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
