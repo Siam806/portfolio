@@ -1,5 +1,7 @@
 ---
-import { useTranslations, getOtherLocale, type Lang, type AllKeys } from '../i18n/utils';
+import { Image } from 'astro:assets';
+import logo from '../assets/Logo_Transparent_Cropped.png';
+import { getOtherLocale,useTranslations,type AllKeys,type Lang } from '../i18n/utils';
 
 interface Props {
   lang: Lang;
@@ -11,16 +13,18 @@ const t = useTranslations(lang);
 const otherLocale = getOtherLocale(lang);
 
 // Determine the target URL for language toggle
-const isHomePage = currentPath === '/' || currentPath === '/en/';
+const isHomePage = currentPath === '/' || currentPath === '/en/' || currentPath === '/en';
 const targetPath = isHomePage
   ? otherLocale === 'de' ? '/' : '/en/'
   : currentPath.replace(`/${lang}/`, otherLocale === 'de' ? '/' : `/${otherLocale}/`).replace('//', '/');
 
+const homePath = lang === 'de' ? '/' : '/en/';
+
 const navItems: Array<{ key: AllKeys; href: string }> = [
-  { key: 'nav.services', href: '#services' },
-  { key: 'nav.projects', href: '#projects' },
-  { key: 'nav.about', href: '#about' },
-  { key: 'nav.contact', href: '#contact' },
+  { key: 'nav.services', href: isHomePage ? '#services' : `${homePath}#services` },
+  { key: 'nav.projects', href: isHomePage ? '#projects' : `${homePath}#projects` },
+  { key: 'nav.about', href: isHomePage ? '#about' : `${homePath}#about` },
+  { key: 'nav.contact', href: isHomePage ? '#contact' : `${homePath}#contact` },
 ];
 ---
 
@@ -28,8 +32,8 @@ const navItems: Array<{ key: AllKeys; href: string }> = [
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
       {/* Brand */}
-      <a href={lang === 'de' ? '/' : '/en/'} class="text-xl font-bold text-gray-900 hover:text-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">
-        Siam IT
+      <a href={lang === 'de' ? '/' : '/en/'} class="flex items-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded" aria-label="Siam IT – Home">
+        <Image src={logo} alt="Siam IT" width={39} height={36} densities={[1, 2]} class="h-9 w-auto" />
       </a>
 
       {/* Desktop Navigation */}
